@@ -5,6 +5,9 @@ import logging
 import warnings
 import gzip
 import pysam
+import os
+
+wk_dir = os.getcwd()
 
 def validate_deprecated_args(old_arg, new_arg, old_name, new_name):
     if old_arg is not None:
@@ -148,7 +151,7 @@ def filter_file(
     
     pysam.set_verbosity(pysam.set_verbosity(0))
 
-    with tf.TemporaryDirectory() as temp_dir:
+    with tf.TemporaryDirectory(prefix='temp_', suffix='_dir', dir=wk_dir ) as temp_dir:
         temp_1 = f"{temp_dir}/output1{suffix}"
         temp_2 = f"{temp_dir}/output2{suffix}"
         temp_3 = f"{temp_dir}/output3{suffix}"
